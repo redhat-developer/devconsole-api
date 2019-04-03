@@ -33,3 +33,5 @@ $ operator-sdk add api --api-version=devconsole.openshift.io/v1alpha1 --kind=<Ne
 # Move generated API to devconsole-api
 $ rsync -avh --progress ./pkg/apis/devconsole/ $GOPATH/src/github.com/redhat-developer/devconsole-api/pkg/apis/devconsole/
 ```
+[dep_tool]:https://golang.github.io/dep/docs/installation.html
+[go_tool]:https://golang.org/dl/
