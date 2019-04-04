@@ -5,19 +5,20 @@ The canonical location of the OpenShift DevConsole API definition. This repo hol
 ## Prerequisites
 
 - [dep][dep_tool] version v0.5.0+.
+- [git][git_tool]
 - [go][go_tool] version v1.10+.
+- [docker][docker_tool] version 17.03+.
 
 ## Build API
 
 ```sh
-$ dep ensure
-$ go build github.com/redhat-developer/devconsole-api/pkg/apis/
+$ make build
 ```
 
-Regenerate code after modifying API:
+Regenerate deepcopy after modifying API:
 
 ```sh
-$ ./generate-deepcopy.sh
+$ make generate
 ```
 
 ## Add a new API for the custom resource
@@ -35,3 +36,5 @@ $ rsync -avh --progress ./pkg/apis/devconsole/ $GOPATH/src/github.com/redhat-dev
 ```
 [dep_tool]:https://golang.github.io/dep/docs/installation.html
 [go_tool]:https://golang.org/dl/
+[git_tool]:https://git-scm.com/downloads
+[docker_tool]:https://docs.docker.com/install/
