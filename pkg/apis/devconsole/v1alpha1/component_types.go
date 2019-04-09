@@ -10,7 +10,7 @@ type ComponentSpec struct {
 	// Container image use to build (nodejs, golang etc..)
 	BuildType string `json:"buildType"`
 	// GitSourceRef is the source code of your component. Currently, only public remote URLs are supported.
-	GitSourceRef string `json:"codebase"`
+	GitSourceRef string `json:"gitSourceRef"`
 }
 
 // ComponentStatus defines the observed state of Component.
