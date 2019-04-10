@@ -50,7 +50,40 @@ type GitSourceStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book.kubebuilder.io/beyond_basics/generating_crd.html
+
+	// State represents current state of the GitSource, can be either initializing or ready
+	State State `json:"state"`
+
+	// Connection holds information whether the last attempt to reach the git source was successful or not. Optional
+	Connection Connection `json:"state,omitempty"`
 }
+
+// State represents current state of the GitSource,
+type State string
+
+// Initializing represents a state of GitSource whose creation wasn't completed and is not ready to use
+const Initializing State = "initializing"
+
+// Ready represents a state of GitSource whose creation was completed and is ready to use
+const Ready State = "ready"
+
+// Connection holds information whether the last attempt to reach the git source was successful or not
+type Connection struct {
+	// State is the result of the attempt to reach a GitSource. Can be either Failed or OK
+	State ConnectionState `json:"state"`
+
+	// Error has the error message if the attempt to reach a GitSource failed
+	Error string `json:"state,omitempty"`
+}
+
+// ConnectionState is the result of the attempt to reach a GitSource.
+type ConnectionState string
+
+// Failed is the state of Connection when an attempt to reach a GitSource failed
+const Failed ConnectionState = "failed"
+
+// OK is the state of Connection when an attempt to reach a GitSource was successful
+const OK ConnectionState = "ok"
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
