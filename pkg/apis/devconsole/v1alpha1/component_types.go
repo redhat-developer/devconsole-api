@@ -61,7 +61,7 @@ func (c *Component) GetLabelPartOf() string {
 func (c *Component) GetLabelInstance() string {
 	instance := c.Labels["app.kubernetes.io/instance"]
 	if instance == "" {
-		instance = c.GetName()
+		instance = c.GetLabelName()
 	}
 	return instance
 }
