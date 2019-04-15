@@ -36,6 +36,8 @@ type Component struct {
 	Status ComponentStatus `json:"status,omitempty"`
 }
 
+// GetComponent retrieves the name label. If not present,
+// infer the name by using the component name value.
 func (c *Component) GetName() string {
 	name := c.Labels["app.kubernetes.io/name"]
 	if name == "" {
@@ -44,14 +46,18 @@ func (c *Component) GetName() string {
 	return name
 }
 
+// GetComponent retrieves the component label.
 func (c *Component) GetComponent() string {
 	return c.Labels["app.kubernetes.io/component"]
 }
 
+// GetComponent retrieves the part-of label.
 func (c *Component) GetPartOf() string {
 	return c.Labels["app.kubernetes.io/part-of"]
 }
 
+// GetComponent retrieves the instance label. If not present,
+// infer the instance by calling GetName().
 func (c *Component) GetInstance() string {
 	instance := c.Labels["app.kubernetes.io/instance"]
 	if instance == "" {
@@ -60,6 +66,7 @@ func (c *Component) GetInstance() string {
 	return instance
 }
 
+// GetComponent retrieves the version label.
 func (c *Component) GetVersion() string {
 	return c.Labels["app.kubernetes.io/version"]
 }
