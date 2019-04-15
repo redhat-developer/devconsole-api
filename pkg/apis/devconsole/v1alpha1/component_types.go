@@ -37,7 +37,31 @@ type Component struct {
 }
 
 func (c *Component) GetName() string {
-	return c.Name
+	name := c.Labels["app.kubernetes.io/name"]
+	if name == "" {
+		name = c.Name
+	}
+	return name
+}
+
+func (c *Component) GetComponent() string {
+	return c.Labels["app.kubernetes.io/component"]
+}
+
+func (c *Component) GetPartOf() string {
+	return c.Labels["app.kubernetes.io/part-of"]
+}
+
+func (c *Component) GetInstance() string {
+	instance := c.Labels["app.kubernetes.io/instance"]
+	if instance == "" {
+		instance = c.GetName()
+	}
+	return instance
+}
+
+func (c *Component) GetVersion() string {
+	return c.Labels["app.kubernetes.io/version"]
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
