@@ -55,7 +55,7 @@ type GitSourceStatus struct {
 	State State `json:"state"`
 
 	// Connection holds information whether the last attempt to reach the git source was successful or not. Optional
-	Connection Connection `json:"state,omitempty"`
+	Connection Connection `json:"connection,omitempty"`
 }
 
 // State represents current state of the GitSource,
@@ -73,7 +73,7 @@ type Connection struct {
 	State ConnectionState `json:"state"`
 
 	// Error has the error message if the attempt to reach a GitSource failed
-	Error string `json:"state,omitempty"`
+	Error string `json:"error,omitempty"`
 }
 
 // ConnectionState is the result of the attempt to reach a GitSource.
