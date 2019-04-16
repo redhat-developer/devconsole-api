@@ -36,10 +36,6 @@ type Component struct {
 	Status ComponentStatus `json:"status,omitempty"`
 }
 
-func (c *Component) GetName() string {
-	return c.Name
-}
-
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // ComponentList contains a list of Component.
