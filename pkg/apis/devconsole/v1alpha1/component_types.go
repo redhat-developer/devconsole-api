@@ -7,7 +7,7 @@ import (
 // ComponentSpec defines the desired state of Component.
 // +k8s:openapi-gen=true
 type ComponentSpec struct {
-	// Container image use to build (nodejs, golang etc..)
+	// BuildType is the container image used to build (nodejs, golang etc..).
 	BuildType string `json:"buildType"`
 	// GitSourceRef is the source code of your component. Currently, only public remote URLs are supported.
 	GitSourceRef string `json:"gitSourceRef"`
@@ -20,8 +20,21 @@ type ComponentSpec struct {
 // ComponentStatus defines the observed state of Component.
 // +k8s:openapi-gen=true
 type ComponentStatus struct {
-	RevNumber string
+	// RevNumber indicates if the component has been updated.
+	// It is linked to the ObjectMeta.ResourceVersion of the component.
+	RevNumber string `json:"revNumber,omitempty"`
+	// Phase indicates which phase the component build and deployment process is.
+	Phase     string `json:"phase,omitempty"`
 }
+
+const (
+	// PhaseBuilding indicates the component is under build.
+	PhaseBuilding string = "Building"
+	// PhaseDeploying indicates the component is under deployment.
+	PhaseDeploying string = "Deploying"
+	// PhaseDeployed indicates the component is deployed.
+	PhaseDeployed string = "Deployed"
+)
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
