@@ -34,7 +34,23 @@ type GitSourceAnalysisStatus struct {
 
 	// Error contains an error message in case the build environment detection fails. Optional
 	Error string `json:"error,omitempty"`
+
+	// Reason represents the reason why the GitSource analysis (build type detection) failed. Optional
+	Reason AnalysisFailureReason `json:"reason,omitempty"`
 }
+
+// AnalysisFailureReason represents the reason why the GitSource analysis (build type detection) failed
+type AnalysisFailureReason string
+
+const (
+	// NotSupportedType represents the failure reason when no appropriate git implementation was found
+	// for the given combination of repository and secret
+	NotSupportedType AnalysisFailureReason = "NotSupportedType"
+	// DetectionFailed represents the failure reason when the actual detection logic failed
+	DetectionFailed AnalysisFailureReason = "DetectionFailed"
+	// AnalysisInternalFailure represents a failure reason caused by any internal failure
+	AnalysisInternalFailure AnalysisFailureReason = "InternalFailure"
+)
 
 // BuildEnvStatistics holds information about detected languages and build types in the GitSource
 type BuildEnvStats struct {

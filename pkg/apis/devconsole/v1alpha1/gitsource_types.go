@@ -52,7 +52,7 @@ type GitSourceStatus struct {
 	// Add custom validation using kubebuilder tags: https://book.kubebuilder.io/beyond_basics/generating_crd.html
 
 	// State represents current state of the GitSource, can be either initializing or ready
-	State State `json:"state"`
+	State State `json:"state,omitempty"`
 
 	// Connection holds information whether the last attempt to reach the git source was successful or not. Optional
 	Connection Connection `json:"connection,omitempty"`
@@ -72,18 +72,34 @@ type Connection struct {
 	// State is the result of the attempt to reach a GitSource. Can be either Failed or OK
 	State ConnectionState `json:"state"`
 
-	// Error has the error message if the attempt to reach a GitSource failed
+	// Error has the error message if the attempt to reach a GitSource failed. Optional
 	Error string `json:"error,omitempty"`
+
+	// Reason represents the reason why the attempt to reach a GitSource failed. Optional
+	Reason ConnectionFailureReason `json:"reason,omitempty"`
 }
 
 // ConnectionState is the result of the attempt to reach a GitSource.
 type ConnectionState string
+// ConnectionFailureReason represents the reason why the attempt to reach a GitSource failed
+type ConnectionFailureReason string
 
-// Failed is the state of Connection when an attempt to reach a GitSource failed
-const Failed ConnectionState = "failed"
+const (
+	// Failed is the state of Connection when an attempt to reach a GitSource failed
+	Failed ConnectionState = "failed"
+	// OK is the state of Connection when an attempt to reach a GitSource was successful
+	OK ConnectionState = "ok"
 
-// OK is the state of Connection when an attempt to reach a GitSource was successful
-const OK ConnectionState = "ok"
+	// RepoNotReachable represents a failure reason when an attempt to reach the git repo failed.
+	// This failure could be caused by either a wrong URL or insufficient permissions needed to access the repo.
+	RepoNotReachable ConnectionFailureReason = "RepoNotReachable"
+	// BranchNotFound represents a failure reason when the specified branch wasn't found in the repository
+	BranchNotFound ConnectionFailureReason = "BranchNotFound"
+	// BadCredentials represents a failure reason when an attempt to authenticate to the repo using the given secret failed
+	BadCredentials ConnectionFailureReason = "BadCredentials"
+	// ConnectionInternalFailure represents a failure reason caused by any internal failure
+	ConnectionInternalFailure ConnectionFailureReason = "InternalFailure"
+)
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
