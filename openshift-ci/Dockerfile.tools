@@ -34,6 +34,8 @@ ENV PATH=$PATH:$GOPATH/bin
 
 RUN mkdir -p ${GOPATH}/src/${GO_PACKAGE_PATH}/
 
+USER 10001
+
 WORKDIR ${GOPATH}/src/${GO_PACKAGE_PATH}
 
 ENTRYPOINT [ "/bin/bash" ]
