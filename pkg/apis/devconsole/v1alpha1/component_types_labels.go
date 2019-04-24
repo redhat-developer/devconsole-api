@@ -1,11 +1,11 @@
 package v1alpha1
 
 // GetLabelName retrieves the label name. If not present,
-// infer the name by using the component name value.
+// infer the name by using the component spec buildtype value.
 func (c *Component) GetLabelName() string {
 	name := c.Labels["app.kubernetes.io/name"]
 	if name == "" {
-		name = c.Name
+		name = c.Spec.BuildType
 	}
 	return name
 }
