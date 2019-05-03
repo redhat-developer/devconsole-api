@@ -6,7 +6,6 @@ import (
 
 // ComponentSpec defines the desired state of Component.
 // +k8s:openapi-gen=true
-// +kubebuilder:subresource:status
 type ComponentSpec struct {
 	// BuildType is the container image used to build (nodejs, golang etc..).
 	BuildType string `json:"buildType"`
@@ -25,7 +24,7 @@ type ComponentStatus struct {
 	// It is linked to the ObjectMeta.ResourceVersion of the component.
 	RevNumber string `json:"revNumber,omitempty"`
 	// Phase indicates which phase the component build and deployment process is.
-	Phase string `json:"phase,omitempty"`
+	Phase     string `json:"phase,omitempty"`
 }
 
 const (

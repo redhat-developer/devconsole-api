@@ -27,25 +27,25 @@ required = [
 [[override]]
   name = "sigs.k8s.io/controller-tools"
   version = "=v0.1.8"
+
 [[override]]
   name = "k8s.io/api"
-  version = "kubernetes-1.13.4"
+  # revision for tag "kubernetes-1.13.1"
+  revision = "05914d821849570fba9eacfb29466f2d8d3cd229"
 
 [[override]]
   name = "k8s.io/apiextensions-apiserver"
-  version = "kubernetes-1.13.4"
+  # revision for tag "kubernetes-1.13.1"
+  revision = "0fe22c71c47604641d9aa352c785b7912c200562"
 
 [[override]]
   name = "k8s.io/apimachinery"
-  version = "kubernetes-1.13.4"
-
-[[override]]
-  name = "k8s.io/client-go"
-  version = "kubernetes-1.13.4"
+  # revision for tag "kubernetes-1.13.1"
+  revision = "2b1284ed4c93a43499e781493253e2ac5959c4fd"
 
 [[override]]
   name = "sigs.k8s.io/controller-runtime"
-  version = "v0.2.0-alpha.0"
+  version = "=v0.1.10"
 
 [prune]
   go-tests = true

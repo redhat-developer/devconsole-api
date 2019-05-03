@@ -25,9 +25,7 @@ func (c *Component) GetLabelPartOf() string {
 func (c *Component) GetLabelInstance() string {
 	instance := c.Labels["app.kubernetes.io/instance"]
 	if instance == "" {
-		// Set instance to the component's name.
-		// This is used in secondary resource (bc, dc, build) as label selector for a given component.
-		instance = c.Name
+		instance = c.GetLabelName()
 	}
 	return instance
 }
