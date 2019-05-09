@@ -36,3 +36,9 @@ func (c *Component) GetLabelInstance() string {
 func (c *Component) GetLabelVersion() string {
 	return c.Labels["app.kubernetes.io/version"]
 }
+
+// GetLabelDeploymentConfig retrieves the label deploymentconfig. This would be
+// same as value of label instance.
+func (c *Component) GetLabelDeploymentConfig() string {
+	return c.GetLabelInstance()
+}
